@@ -1,0 +1,54 @@
+server_ip = "192.168.56.60"
+
+agents = { "agent1" => "192.168.56.61",
+           "agent2" => "192.168.56.62",
+           "agent3" => "192.168.56.63",
+           "agent4" => "192.168.56.64",
+           "agent5" => "192.168.56.65"
+}
+
+# Extra parameters in INSTALL_K3S_EXEC variable because of
+# K3s picking up the wrong interface when starting server and agent
+# https://github.com/alexellis/k3sup/issues/306
+
+server_script = <<-SHELL
+    sudo -i
+    apt install curl
+    export INSTALL_K3S_EXEC="--bind-address=#{server_ip} --node-external-ip=#{server_ip} --flannel-iface=eth1"
+    curl -sfL https://get.k3s.io | sh -
+    sudo cp /var/lib/rancher/k3s/server/token /vagrant_shared
+    sudo cp /etc/rancher/k3s/k3s.yaml /vagrant_shared
+    SHELL
+
+agent_script = <<-SHELL
+    sudo -i
+    apt install curl
+    export K3S_TOKEN_FILE=/vagrant_shared/token
+    export K3S_URL=https://#{server_ip}:6443
+    export INSTALL_K3S_EXEC="--flannel-iface=eth1"
+    curl -sfL https://get.k3s.io | sh -
+    SHELL
+
+Vagrant.configure("2") do |config|
+  config.vm.box = "generic/ubuntu1804"
+  config.vm.define "server", primary: true do |server|
+    server.vm.network "private_network", ip: server_ip
+    server.vm.hostname = "server"
+    server.vm.provider "libvirt" do |vb|
+      vb.memory = "20096"
+      vb.cpus = "10"
+
+    end
+  end
+
+  agents.each do |agent_name, agent_ip|
+    config.vm.define agent_name do |agent|
+      agent.vm.network "private_network", ip: agent_ip
+      agent.vm.hostname = agent_name
+      agent.vm.provider "libvirt" do |vb|
+        vb.memory = "10024"
+        vb.cpus = "4"
+      end
+    end
+  end
+end
