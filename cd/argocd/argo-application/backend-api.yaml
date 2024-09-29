@@ -5,21 +5,21 @@ metadata:
   namespace: argocd
   annotations:
     argocd-image-updater.argoproj.io/image-list: api=docker.io/1wolfalone1/mealsync-api:latest
-    argocd-image-updater.argoproj.io/api.update-strategy: digest
+    argocd-image-updater.argoproj.io/update-strategy: digest
     # argocd-image-updater.argoproj.io/api.pull-secret: pullsecret:argocd/dockerhub-secret
-    # argocd-image-updater.argoproj.io/api.force-update: "true"
-    argocd-image-updater.argoproj.io/write-back-method: argocd
-    # argocd-image-updater.argoproj.io/git-branch: main
-    # argocd-image-updater.argoproj.io/write-back-target: kustomization
+    argocd-image-updater.argoproj.io/api.force-update: "true"
+    argocd-image-updater.argoproj.io/write-back-method: git
+    argocd-image-updater.argoproj.io/git-branch: main
+    argocd-image-updater.argoproj.io/write-back-target: kustomization
 spec:
   destination:
     namespace: backend-api
     server: https://kubernetes.default.svc
   project: default
-  source:
-    path: cd/backend-api-k8s-yaml
-    repoURL: git@github.com:1wolfalone1/MealSync-IaC-CD.git
-    targetRevision: HEAD
+  sources:
+    - path: cd/backend-api-k8s-yaml/overlays/production
+      repoURL: git@github.com:1wolfalone1/MealSync-IaC-CD.git
+      targetRevision: HEAD
   syncPolicy:
     automated:                   # Enables auto-sync
       prune: true                # Automatically delete resources no longer in Git
