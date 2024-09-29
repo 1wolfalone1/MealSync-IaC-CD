@@ -5,12 +5,12 @@ metadata:
   namespace: argocd
   annotations:
     argocd-image-updater.argoproj.io/image-list: api=docker.io/1wolfalone1/mealsync-api:latest
-    argocd-image-updater.argoproj.io/api.update-strategy: latest
+    argocd-image-updater.argoproj.io/api.update-strategy: digest
     # argocd-image-updater.argoproj.io/api.pull-secret: pullsecret:argocd/dockerhub-secret
-    argocd-image-updater.argoproj.io/api.force-update: "true"
+    # argocd-image-updater.argoproj.io/api.force-update: "true"
     argocd-image-updater.argoproj.io/write-back-method: argocd
-    argocd-image-updater.argoproj.io/git-branch: main
-    argocd-image-updater.argoproj.io/write-back-target: kustomization
+    # argocd-image-updater.argoproj.io/git-branch: main
+    # argocd-image-updater.argoproj.io/write-back-target: kustomization
 spec:
   destination:
     namespace: backend-api
@@ -23,5 +23,7 @@ spec:
   syncPolicy:
     automated:                   # Enables auto-sync
       prune: true                # Automatically delete resources no longer in Git
+      selfHeal: true
     syncOptions:
       - CreateNamespace=true      # Option to create the namespace if it doesn't exist
+      - Replace=true              # Force resource replacement
