@@ -1,0 +1,17 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: argocd-secrets
+  namespace: argocd
+spec:
+  destination:
+    namespace: backend-api
+    server: https://kubernetes.default.svc
+  project: default
+  source:
+    path: cd/backend-api-k8s-yaml
+    repoURL: git@github.com:1wolfalone1/MealSync-IaC-CD.git
+    targetRevision: HEAD
+  syncPolicy:
+    syncOptions:
+      - CreateNamespace=true
