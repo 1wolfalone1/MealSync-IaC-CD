@@ -8,7 +8,7 @@ metadata:
     argocd-image-updater.argoproj.io/update-strategy: digest
     # argocd-image-updater.argoproj.io/api.pull-secret: pullsecret:argocd/dockerhub-secret
     argocd-image-updater.argoproj.io/api.force-update: "true"
-    argocd-image-updater.argoproj.io/write-back-method: git
+    argocd-image-updater.argoproj.io/write-back-method: argocd
     argocd-image-updater.argoproj.io/git-branch: main
     argocd-image-updater.argoproj.io/write-back-target: kustomization
 spec:
@@ -20,6 +20,8 @@ spec:
     - path: cd/backend-api-k8s-yaml/overlays/production
       repoURL: git@github.com:1wolfalone1/MealSync-IaC-CD.git
       targetRevision: HEAD
+      kustomize:
+        namePrefix: prod-  # Optional: adding a prefix to resource names
   syncPolicy:
     automated:                   # Enables auto-sync
       prune: true                # Automatically delete resources no longer in Git

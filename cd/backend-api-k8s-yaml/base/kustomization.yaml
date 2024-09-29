@@ -6,3 +6,7 @@ resources:
   - ./deployment.yaml
   - ./service-nodeport.yaml
   - ./ingress.yaml
+#
+# images:
+# - name: backend-api
+#   newTag: latest
