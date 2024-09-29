@@ -19,5 +19,6 @@ spec:
       - ServerSideApply=true
     automated: 
       prune: true
+      force: true
       allowEmpty: true
       selfHeal: true 
