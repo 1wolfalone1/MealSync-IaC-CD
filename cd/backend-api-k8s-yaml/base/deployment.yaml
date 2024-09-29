@@ -16,6 +16,6 @@ spec:
     spec:
       containers:
         - name: docker.io/1wolfalone1/mealsync-api:latest 
-        imagePullPolicy: Always  # Ensures the image is always pulled from the registry
-        ports:
+          imagePullPolicy: Always  # Ensures the image is always pulled from the registry
+          ports:
         - containerPort: 8080
