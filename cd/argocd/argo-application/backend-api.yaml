@@ -15,3 +15,7 @@ spec:
   syncPolicy:
     syncOptions:
       - CreateNamespace=true
+  metadata:
+    annotations:
+      argocd-image-updater.argoproj.io/image.backend-api: 1wolfalone1/mealsync-api:latest
+
