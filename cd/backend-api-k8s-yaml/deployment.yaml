@@ -15,7 +15,7 @@ spec:
         app: api
     spec:
       containers:
-      - name: nginx
-        image: nginx:latest
+      - name: backend-api
+        image: 1wolfalone1/mealsync-api:latest
         ports:
-        - containerPort: 80
+        - containerPort: 8080

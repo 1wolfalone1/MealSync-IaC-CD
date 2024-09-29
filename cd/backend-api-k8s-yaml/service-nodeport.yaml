@@ -10,5 +10,5 @@ spec:
   ports:
   - protocol: TCP
     port: 80      # Service port (inside the cluster)
-    targetPort: 80 # Container port
+    targetPort: 8080 # Container port
   sessionAffinity: None

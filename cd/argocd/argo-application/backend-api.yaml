@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: argocd-secrets
+  name: backend-api
   namespace: argocd
 spec:
   destination:
