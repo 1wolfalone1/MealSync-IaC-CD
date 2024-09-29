@@ -3,7 +3,7 @@ kind: Application
 metadata:
   name: backend-api
   namespace: argocd
-  argocd-image-updater.argoproj.io/image.backend-api: 1wolfalone1/mealsync-api:latest
+  argocd-image-updater.argoproj.io/image-list: 1wolfalone1/mealsync-api:latest 
 spec:
   destination:
     namespace: backend-api
