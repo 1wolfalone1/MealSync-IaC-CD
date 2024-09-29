@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: backend-api
-        image: 1wolfalone1/mealsync-api:latest
+        image: 1wolfalone1/mealsync-api
         imagePullPolicy: Always  # Ensures the image is always pulled from the registry
         ports:
         - containerPort: 8080
