@@ -6,3 +6,7 @@ patches:
 
 resources:
 - ../../base
+
+# images:
+# - name: docker.io/1wolfalone1/mealsync-api:latest 
+#   newTag: latest
