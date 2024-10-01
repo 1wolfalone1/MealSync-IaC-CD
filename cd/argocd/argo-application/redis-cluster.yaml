@@ -11,14 +11,12 @@ spec:
     repoURL: 'registry-1.docker.io/bitnamicharts' 
     targetRevision: 9.8.1
     plugin:
-      # name: argocd-vault-plugin
       env:
       - name: HELM_VALUES
         value: |
           password: <path:kv/data/test#password>
-      - name: helm_args
-        value: -f https://github.com/1wolfalone1/arthub-cicd-aws-eks-cluster/raw/main/helm-values/redis.yaml 
-      # - name: HELM_VALUES
+      # - name: helm_args
+      #   value: -f https://github.com/1wolfalone1/arthub-cicd-aws-eks-cluster/raw/main/helm-values/redis.ya
       #   value: |
       #     password: <path:kv/data/test#password>
     # helm:

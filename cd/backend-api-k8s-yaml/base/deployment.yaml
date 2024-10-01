@@ -20,3 +20,6 @@ spec:
         imagePullPolicy: Always  # Ensures the image is always pulled from the registry
         ports:
         - containerPort: 8080
+        envFrom:
+        - secretRef:
+            name: backend-api-secrets  # Reference to the Secret
