@@ -1,3 +1,7 @@
+configs:
+  params:
+    server.insecure: true
+
 repoServer:
   rbac:
     - verbs:

@@ -1,0 +1,22 @@
+apiVersion: v1
+kind: Secret
+metadata:
+  name: backend-api-secrets
+  namespace: backend-api
+  annotations:
+    avp.kubernetes.io/path: "/kv/data/mealsync" #path of secret in vault
+type: Opaque
+stringData:
+  ALLOW_ORIGIN: <ALLOW_ORIGIN>
+  DATABASE_URL: <DATABASE_URL>
+  TOKEN_KEY: <TOKEN_KEY>
+  TOKEN_ISSUER: <TOKEN_ISSUER>
+  TOKEN_AUDIENCE: <TOKEN_AUDIENCE>
+  TOKEN_TIME_EXPIRED_IN_HOURS: <TOKEN_TIME_EXPIRED_IN_HOURS> #Fomat should be like this with keye
+  REFRESH_TOKEN_TIME_EXPIRED_IN_HOURS: <REFRESH_TOKEN_TIME_EXPIRED_IN_HOURS>
+  REDIS_URL: <REDIS_URL>
+  PROJECT_ID: <PROJECT_ID>
+  GOOGLE_APPLICATION_CREDENTIALS: <GOOGLE_APPLICATION_CREDENTIALS>
+  EMAIL: <EMAIL>
+  EMAIL_PASSWORD: <EMAIL_PASSWORD>
+  SMTP_CLIENT: <SMTP_CLIENT>
