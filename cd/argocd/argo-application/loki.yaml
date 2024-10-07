@@ -1,0 +1,29 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: loki
+  namespace: argocd
+spec:
+  project: default
+  sources:
+    - chart: 'loki'
+      repoURL: 'https://grafana.github.io/helm-charts'
+      targetRevision: 6.17.1 
+      helm:
+        releaseName: loki
+        valueFiles:
+        - $values/cd/helm-values-yaml/loki.yaml
+    - repoURL: git@github.com:1wolfalone1/MealSync-IaC-CD.git
+      targetRevision: HEAD
+      ref: values
+  destination:
+    server: "https://kubernetes.default.svc"
+    namespace: logging
+  syncPolicy:
+    syncOptions:
+    - CreateNamespace=true
+    - ServerSideApply=true
+    automated:
+      prune: true
+      allowEmpty: true
+      selfHeal: true
