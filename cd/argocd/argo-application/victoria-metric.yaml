@@ -1,0 +1,30 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: vm-cluster
+  namespace: argocd
+spec:
+  project: default
+  source:
+    - chart: victoria-metrics-k8s-stack 
+      path: victoria-metrics-k8s-stack 
+      repoURL: 'https://victoriametrics.github.io/helm-charts/' 
+      targetRevision: 0.17.5 
+    helm:
+      releaseName: vm-k8s
+      valueFiles:
+      - $values/cd/helm-values-yaml/vm-cluster.yaml    
+    - repoURL: git@github.com:1wolfalone1/MealSync-IaC-CD.git
+      targetRevision: HEAD
+      ref: values
+  destination:
+    server: "https://kubernetes.default.svc"
+    namespace: monitoring 
+  syncPolicy:
+    syncOptions:
+      - CreateNamespace=true
+      - ServerSideApply=true
+    automated: 
+      prune: true
+      allowEmpty: true
+      selfHeal: true 
