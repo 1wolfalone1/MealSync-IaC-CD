@@ -5,15 +5,15 @@ metadata:
   namespace: argocd
 spec:
   project: default
-  source:
+  sources:
     - chart: victoria-metrics-k8s-stack 
       path: victoria-metrics-k8s-stack 
       repoURL: 'https://victoriametrics.github.io/helm-charts/' 
       targetRevision: 0.17.5 
-    helm:
-      releaseName: vm-k8s
-      valueFiles:
-      - $values/cd/helm-values-yaml/vm-cluster.yaml    
+      helm:
+        releaseName: vm-k8s
+        valueFiles:
+        - $values/cd/helm-values-yaml/vm-cluster.yaml    
     - repoURL: git@github.com:1wolfalone1/MealSync-IaC-CD.git
       targetRevision: HEAD
       ref: values

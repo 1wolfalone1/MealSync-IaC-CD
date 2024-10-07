@@ -653,7 +653,7 @@ grafana:
     accessModes:
     - ReadWriteOnce
     size: 5Gi
-    storageClassName: "gp2"
+    storageClassName: ""
                 
   ## ForceDeployDatasource Create datasource configmap even if grafana deployment has been disabled
   forceDeployDatasource: false
