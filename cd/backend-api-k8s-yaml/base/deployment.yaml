@@ -20,6 +20,16 @@ spec:
         imagePullPolicy: Always  # Ensures the image is always pulled from the registry
         ports:
         - containerPort: 8080
+        volumeMounts:
+        - name: firebase-secret
+          mountPath: /tmp/firebase_credentials.json
+          subPath: FIREBASE_JSON   # Specific key in the Secret
+          readOnly: true
         envFrom:
         - secretRef:
             name: backend-api-secrets  # Reference to the Secret
+      volumes:
+      - name: firebase-secret
+        secret:
+          secretName: backend-firebase-secrets
+
