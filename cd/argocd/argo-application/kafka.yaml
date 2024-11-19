@@ -4,33 +4,11 @@ metadata:
   name: kafka
   namespace: argocd
 spec:
+  destination:
+    namespace: default
+    server: https://kubernetes.default.svc
   project: default
   source:
-    chart: kafka
-    path: kafka
-    repoURL: 'registry-1.docker.io/bitnamicharts' 
-    targetRevision: 31.0.0 
-    plugin:
-      env:
-      - name: HELM_VALUES
-        value: |
-          password: <path:kv/data/test#password>
-      # - name: helm_args
-      #   value: -f https://github.com/1wolfalone1/arthub-cicd-aws-eks-cluster/raw/main/helm-values/redis.ya
-      #   value: |
-      #     password: <path:kv/data/test#password>
-    # helm:
-    #   releaseName: redis-cluster
-    #   valueFiles:
-    #   - https://github.com/1wolfalone1/arthub-cicd-aws-eks-cluster/raw/main/helm-values/redis.yaml 
-  destination:
-    server: "https://kubernetes.default.svc"
-    namespace: kafka
-  syncPolicy:
-    syncOptions:
-      - CreateNamespace=true
-      - ServerSideApply=true
-    automated: 
-      prune: true
-      allowEmpty: true
-      selfHeal: true 
+    path: cd/kafka
+    repoURL: git@github.com:1wolfalone1/MealSync-IaC-CD.git
+    targetRevision: HEAD
