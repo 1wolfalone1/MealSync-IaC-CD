@@ -14,7 +14,7 @@ data "aws_availability_zones" "available" {
 }
 
 locals {
-  cluster_name = "arthub-eks"
+  cluster_name = "mealsync-eks"
 }
 
 resource "random_string" "suffix" {
@@ -26,7 +26,7 @@ module "vpc" {
   source  = "terraform-aws-modules/vpc/aws"
   version = "5.0.0"
 
-  name = "education-vpc"
+  name = "mealsync-vpc"
 
   cidr = "10.0.0.0/16"
   azs  = slice(data.aws_availability_zones.available.names, 0, 3)
@@ -71,8 +71,8 @@ module "eks" {
   subnet_ids                     = module.vpc.private_subnets
   cluster_endpoint_public_access = true
   aws_auth_users = [{
-    userarn  = "arn:aws:iam::198729665721:user/bird-land"
-    username = "eks"
+    userarn  = "arn:aws:iam::376129875387:user/thiencn"
+    username = "thiencn"
     groups   = ["system:masters"]
   }]
   eks_managed_node_group_defaults = {
@@ -83,9 +83,9 @@ module "eks" {
     one = {
       name = "node-group"
       instance_types = ["t3.medium"]
-      desired_size = 2
+      desired_size = 4
       min_size     = 2
-      max_size     = 4
+      max_size     = 5
     }
     two = {
       name = "node-group-2"
@@ -178,7 +178,7 @@ resource "helm_release" "lb" {
 
   set {
     name  = "clusterName"
-    value = "arthub-eks"
+    value = "mealsync-eks"
   }
 }
 resource "helm_release" "argocd" {

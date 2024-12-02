@@ -9,10 +9,10 @@ metadata:
     alb.ingress.kubernetes.io/backend-protocol: HTTPS
     # alb.ingress.kubernetes.io/backend-protocol-version: GRPC
     # alb.ingress.kubernetes.io/ssl-redirect: "443"
-    alb.ingress.kubernetes.io/certificate-arn: arn:aws:acm:ap-southeast-1:198729665721:certificate/2c7e0d62-24fc-4862-8c1d-4c1eee15acaa
+    alb.ingress.kubernetes.io/certificate-arn: arn:aws:acm:ap-southeast-1:376129875387:certificate/19d06ecd-88d8-4f65-b6bd-4617237bac3c
     # alb.ingress.kubernetes.io/conditions.argogrpc: | 
     #     [{"field":"http-header","httpHeaderConfig":{"httpHeaderName": "Content-Type", "values":["application/grpc"]}}]
-  name: argocd-ingres-4
+  name: argocd-ingres-5
   namespace: argocd
     # Health Check Settings
     # alb.ingress.kubernetes.io/healthcheck-protocol: HTTP 
@@ -33,7 +33,7 @@ spec:
               service:
                 name: argogrpc
                 port:
-                  number: 443
+                  number: 80
             path: /
             pathType: Prefix
 

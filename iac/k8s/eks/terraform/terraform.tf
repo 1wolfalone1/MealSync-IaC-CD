@@ -4,10 +4,10 @@
 terraform {
 
    cloud {
-    organization = "thientryhard"
+    organization = "mealsync"
 
     workspaces {
-      name = "eks-cluster"
+      name = "mealsync"
     }
   } 
   required_providers {
