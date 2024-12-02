@@ -8,8 +8,7 @@ metadata:
     # nginx.ingress.kubernetes.io/proxy-body-size: 8m
     # nginx.ingress.kubernetes.io/rewrite-target: /
     alb.ingress.kubernetes.io/scheme: internet-facing
-    alb.ingress.kubernetes.io/target-type: instance
-    alb.ingress.kubernetes.io/backend-protocol: HTTPS
+    alb.ingress.kubernetes.io/target-type: ip
     # alb.ingress.kubernetes.io/backend-protocol-version: GRPC
     # alb.ingress.kubernetes.io/ssl-redirect: "443"
     alb.ingress.kubernetes.io/certificate-arn: arn:aws:acm:ap-southeast-1:376129875387:certificate/42dcd106-2351-430a-9368-e08e11b58849 
