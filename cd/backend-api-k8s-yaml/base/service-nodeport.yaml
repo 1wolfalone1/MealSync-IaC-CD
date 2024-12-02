@@ -9,6 +9,11 @@ spec:
     app: api
   ports:
   - protocol: TCP
+    name: "80"
     port: 80      # Service port (inside the cluster)
+    targetPort: 8080 # Container port
+  - protocol: TCP
+    name: "443"
+    port: 443 # Service port (inside the cluster)
     targetPort: 8080 # Container port
   sessionAffinity: None
