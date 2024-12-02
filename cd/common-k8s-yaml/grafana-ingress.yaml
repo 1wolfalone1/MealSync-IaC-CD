@@ -2,22 +2,26 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   annotations:
-    external-dns.alpha.kubernetes.io/cloudflare-proxied: "true"
-    external-dns.alpha.kubernetes.io/hostname: grafana.mealsync.org
-    external-dns.alpha.kubernetes.io/target: eaed81dc-037a-44be-9931-a5ae3d12bcea.cfargotunnel.com
     # nginx.ingress.kubernetes.io/rewrite-target: /
+    alb.ingress.kubernetes.io/scheme: internet-facing
+    alb.ingress.kubernetes.io/target-type: ip
+    # alb.ingress.kubernetes.io/backend-protocol-version: GRPC
+    # alb.ingress.kubernetes.io/ssl-redirect: "443"
+    alb.ingress.kubernetes.io/certificate-arn: arn:aws:acm:ap-southeast-1:376129875387:certificate/7fb08132-b35c-457a-b01a-adb709c4b53d 
+
   name: grafana-ingress
   namespace: monitoring
 spec:
+  ingressClassName: alb
   rules:
-    - host: grafana.mealsync.org
+    - host: grafana.1wolfalone1.com
       http:
         paths:
           - backend:
               service:
                 name: grafana-nodeport
                 port:
-                  number: 443
+                  number: 80
             path: /
             pathType: Prefix
   # tls:
