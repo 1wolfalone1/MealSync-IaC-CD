@@ -5,7 +5,7 @@ metadata:
     # alb.ingress.kubernetes.io/actions.ssl-redirect: '{"Type": "redirect", "RedirectConfig":{
     #   "Protocol": "HTTPS", "Port": "443", "StatusCode": "HTTP_301"}}'
     alb.ingress.kubernetes.io/scheme: internet-facing
-    alb.ingress.kubernetes.io/target-type: ip
+    alb.ingress.kubernetes.io/target-type: instance
     alb.ingress.kubernetes.io/backend-protocol: HTTPS
     # alb.ingress.kubernetes.io/backend-protocol-version: GRPC
     # alb.ingress.kubernetes.io/ssl-redirect: "443"
@@ -33,7 +33,7 @@ spec:
               service:
                 name: argogrpc
                 port:
-                  number: 80
+                  number: 443
             path: /
             pathType: Prefix
 
