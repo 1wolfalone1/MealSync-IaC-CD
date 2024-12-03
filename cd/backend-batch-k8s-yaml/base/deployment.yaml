@@ -15,7 +15,7 @@ spec:
         app: batch
     spec:
       containers:
-      - name: my-image
+      - name: batch-container
         image: docker.io/1wolfalone1/mealsync-batch@sha256:5cc620d3af72db49394f5460715eb032617aa787bb86a32b102bd34d16493267
         imagePullPolicy: Always  # Ensures the image is always pulled from the registry
         volumeMounts:
