@@ -28,6 +28,8 @@ spec:
         envFrom:
         - secretRef:
             name: backend-api-secrets  # Reference to the Secret
+      imagePullSecrets:
+      - name: dockerhub-secret
       volumes:
       - name: firebase-secret
         secret:
