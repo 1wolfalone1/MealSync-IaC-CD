@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: batch
+  labels:
+    app: batch
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: batch
+  template:
+    metadata:
+      labels:
+        app: batch
+    spec:
+      containers:
+      - name: my-image
+        image: docker.io/1wolfalone1/mealsync-batch@sha256:5cc620d3af72db49394f5460715eb032617aa787bb86a32b102bd34d16493267
+        imagePullPolicy: Always  # Ensures the image is always pulled from the registry
+        volumeMounts:
+        - name: firebase-secret
+          mountPath: /tmp/firebase_credentials.json
+          subPath: FIREBASE_JSON   # Specific key in the Secret
+          readOnly: true
+        envFrom:
+        - secretRef:
+            name: backend-api-secrets  # Reference to the Secret
+      volumes:
+      - name: firebase-secret
+        secret:
+          secretName: backend-firebase-secrets
+

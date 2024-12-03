@@ -1,0 +1,8 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: backend-api-deployment
+  labels:
+    app: api
+spec:
+  replicas: 1 # increase the number of replicas.
