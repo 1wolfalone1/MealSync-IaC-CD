@@ -18,6 +18,8 @@ spec:
       - name: backend-container
         image: docker.io/1wolfalone1/mealsync-api@sha256:b67f91185a379f123076fd582c5d7a635a53e0e9787bc1df96aeaea53eb194d7
         imagePullPolicy: Always  # Ensures the image is always pulled from the registry
+        imagePullSecrets:
+        - name: dockerhub-secret
         ports:
         - containerPort: 8080
         volumeMounts:
@@ -28,8 +30,6 @@ spec:
         envFrom:
         - secretRef:
             name: backend-api-secrets  # Reference to the Secret
-      imagePullSecrets:
-      - name: dockerhub-secret
       volumes:
       - name: firebase-secret
         secret:
