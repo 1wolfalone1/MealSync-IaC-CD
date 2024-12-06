@@ -14,10 +14,13 @@ spec:
       labels:
         app: api
     spec:
+      imagePullSecrets:
+      - name: dockerhub-secret-2
       containers:
       - name: backend-container
         image: docker.io/1wolfalone1/mealsync-api-2@sha256:98a9711acba83cc18363437f8bd902954949297fd7408fb6c1fd38b3a66e5b79
         imagePullPolicy: Always  # Ensures the image is always pulled from the registry
+
         ports:
         - containerPort: 8080
         volumeMounts:
