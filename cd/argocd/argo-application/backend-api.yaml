@@ -4,7 +4,7 @@ metadata:
   name: backend-api
   namespace: argocd
   annotations:
-    argocd-image-updater.argoproj.io/image-list: api=docker.io/1wolfalone1/mealsync-api:latest
+    argocd-image-updater.argoproj.io/image-list: api=docker.io/1wolfalone1/mealsync-api-2:latest
     argocd-image-updater.argoproj.io/update-strategy: digest
     # argocd-image-updater.argoproj.io/api.pull-secret: pullsecret:argocd/dockerhub-secret
     # argocd-image-updater.argoproj.io/api.force-update: "true"

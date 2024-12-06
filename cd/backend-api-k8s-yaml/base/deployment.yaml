@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: backend-container
-        image: docker.io/1wolfalone1/mealsync-api@sha256:cad8e90e7f0083841e00bbec7687693d2150bf4fb50af93c7a5f444809a0d038
+        image: docker.io/1wolfalone1/mealsync-api-2@sha256:cad8e90e7f0083841e00bbec7687693d2150bf4fb50af93c7a5f444809a0d038
         imagePullPolicy: Always  # Ensures the image is always pulled from the registry
         ports:
         - containerPort: 8080
