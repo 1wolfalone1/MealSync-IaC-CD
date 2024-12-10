@@ -1,0 +1,77 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: mealsync-socketio
+  namespace: socketio
+  labels:
+    app: mealsync-socketio
+spec:
+  containers:
+    - name: mealsync-socketio
+      image: 1wolfalone1/mealsync-socketio:latest
+      ports:
+        - containerPort: 3000
+      env:
+        - name: PORT
+          value: "3000"
+        - name: JWT_SECRET
+          value: "ILoveYouMoreThanICanSayMaiMotTinhYeu"
+        - name: CASSANDRA_CONTACT_POINTS
+          value: "cassandra.cassandra.svc.cluster.local:9042"
+        - name: CASSANDRA_LOCAL_DATA_CENTER
+          value: "datacenter1"
+        - name: CASSANDRA_KEYSPACE
+          value: "chat"
+        - name: KAFKA_BROKER
+          value: "kafka-service.kafka.svc.cluster.local:9092"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: mealsync-socketio-nodeport
+  namespace: socketio
+  labels:
+    app: mealsync-socketio
+spec:
+  type: NodePort
+  ports:
+    - port: 80
+      targetPort: 3000
+      protocol: TCP
+  selector:
+    app: mealsync-socketio
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: mealsync-socketio-ingress
+  namespace: socketio
+  annotations:
+    # external-dns.alpha.kubernetes.io/cloudflare-proxied: "true"
+    # external-dns.alpha.kubernetes.io/hostname: socketio.mealsync.org
+    # external-dns.alpha.kubernetes.io/target: eaed81dc-037a-44be-9931-a5ae3d12bcea.cfargotunnel.com
+    # nginx.ingress.kubernetes.io/proxy-read-timeout: "1800"
+    # nginx.ingress.kubernetes.io/proxy-send-timeout: "1800"
+    # nginx.ingress.kubernetes.io/rewrite-target: /
+    # nginx.ingress.kubernetes.io/secure-backends: "true"
+    # nginx.ingress.kubernetes.io/ssl-redirect: "true"
+    # nginx.ingress.kubernetes.io/websocket-services: mealsync-socketio-nodeport
+    # nginx.org/websocket-services: mealsync-socketio-nodeport 
+    alb.ingress.kubernetes.io/scheme: internet-facing
+    alb.ingress.kubernetes.io/target-type: ip
+    # alb.ingress.kubernetes.io/backend-protocol-version: GRPC
+    # alb.ingress.kubernetes.io/ssl-redirect: "443"
+    alb.ingress.kubernetes.io/certificate-arn: arn:aws:acm:ap-southeast-1:376129875387:certificate/ed9bb905-da6f-484d-912b-dbcc3883aac9 
+spec:
+  ingressClassName: alb
+  rules:
+    - host: socketio.1wolfalone1.com
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: mealsync-socketio-nodeport
+                port:
+                  number: 80

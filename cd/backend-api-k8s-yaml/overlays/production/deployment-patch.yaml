@@ -5,4 +5,4 @@ metadata:
   labels:
     app: api
 spec:
-  replicas: 3 # increase the number of replicas.
+  replicas: 5 # increase the number of replicas.
